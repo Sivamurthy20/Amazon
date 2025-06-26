@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amazon Clone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo"><img src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="Amazon Clone"></div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search Amazon Clone">
+      <button>🔍</button>
+    </div>
+    <div class="nav-right">
+      <div class="nav-item" id="userGreeting">Hello, Sign in<br><strong>Account & Lists</strong></div>
+      <div class="nav-item" onclick="showOrderHistory()">Returns<br><strong>& Orders</strong></div>
+      <div class="nav-item cart" onclick="showCart()">🛒 Cart <span class="cart-count" id="cartCount">0</span></div>
+    </div>
+  </header>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    <select class="category-dropdown" id="categoryDropdown" onchange="filterByCategory()">
+      <option value="all">All</option>
+      <option value="electronics">Electronics</option>
+      <option value="books">Books</option>
+      <option value="fashion">Fashion</option>
+      <option value="deals">Today's Deals</option>
+    </select>
+    <ul id="navbarList">
+      <li>All</li>
+      <li>Today's Deals</li>
+      <li>Customer Service</li>
+      <li>Electronics</li>
+      <li>Books</li>
+      <li>Fashion</li>
+    </ul>
+  </nav>
+
+  <!-- Hero Image -->
+  <section class="hero">
+    <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/Beauty/GW/june/BTF/june_unrec_pc_3000._CB602387846_.jpg" alt="Amazon Banner">
+  </section>
+
+  <!-- Main Content Integration -->
+  <main>
+    <!-- Dynamic Product List -->
+    <div class="products" id="products">
+      <!-- Product Cards -->
+      <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71K84j2O2eL._AC_UL480_FMwebp_QL65_.jpg" alt="Product 1">
+        <h3>Noise Smartwatch</h3>
+        <p>₹1,999</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71TPda7cwUL._AC_UL480_FMwebp_QL65_.jpg" alt="Product 2">
+        <h3>Samsung Galaxy M14</h3>
+        <p>₹10,999</p>
+        <button>Add to Cart</button>
+      </div>
+      <!-- Add more cards as needed -->
+    </div>
+    <!-- Cart Page -->
+    <div class="cart-page" id="cartPage" style="display:none">
+      <h2>Your Cart</h2>
+      <div id="cartItems"></div>
+      <button onclick="checkout()">Checkout</button>
+    </div>
+    <!-- Login/Signup Page -->
+    <div class="auth-page" id="authPage" style="display:none">
+      <h2>Login</h2>
+      <input id="loginUser" placeholder="Username"><br>
+      <input id="loginPass" type="password" placeholder="Password"><br>
+      <button onclick="login()">Login</button>
+      <h2>Signup</h2>
+      <input id="signupUser" placeholder="Username"><br>
+      <input id="signupPass" type="password" placeholder="Password"><br>
+      <button onclick="signup()">Signup</button>
+      <div id="authMsg"></div>
+    </div>
+    <!-- Product Detail Modal -->
+    <div id="productDetailModal" class="product-detail-modal" style="display:none;">
+      <div class="product-detail-content" id="productDetailContent"></div>
+      <button onclick="closeProductDetail()">Close</button>
+    </div>
+    <!-- Order History Section -->
+    <div id="orderHistory" style="display:none;">
+      <h2>Your Orders</h2>
+      <div id="ordersList"></div>
+      <button onclick="hideOrderHistory()">Close</button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Amazon Clone | Built by Siva</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

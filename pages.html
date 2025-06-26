@@ -1,0 +1,24 @@
+<!-- Product Page -->
+<div class="products" id="products"></div>
+
+<!-- Cart Page -->
+<div class="cart-page" id="cartPage" style="display:none">
+  <h2>Your Cart</h2>
+  <div id="cartItems"></div>
+  <button onclick="checkout()">Checkout</button>
+</div>
+
+<!-- Login/Signup Page -->
+<div class="auth-page" id="authPage" style="display:none">
+  <h2>Login</h2>
+  <input id="loginUser" placeholder="Username"><br>
+  <input id="loginPass" type="password" placeholder="Password"><br>
+  <button onclick="login()">Login</button>
+  <h2>Signup</h2>
+  <input id="signupUser" placeholder="Username"><br>
+  <input id="signupPass" type="password" placeholder="Password"><br>
+  <button onclick="signup()">Signup</button>
+  <div id="authMsg"></div>
+</div>
+
+<script src="script.js"></script>
