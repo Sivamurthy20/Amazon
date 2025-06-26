@@ -74,48 +74,15 @@
   </style>
 </head>
 <body class="login-bg">
-  <div class="login-container" id="loginStep1">
-    <div class="login-logo">
-      <img src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="Amazon Logo">
-    </div>
-    <h2>Sign-In</h2>
-    <label for="loginEmail">Email or mobile phone number</label>
-    <input id="loginEmail" type="text" placeholder="Enter email or phone">
-    <button onclick="showPasswordStep()">Continue</button>
-    <div class="login-links">
-      <a href="#">Need help?</a>
-    </div>
-    <div class="login-terms">
-      By continuing, you agree to Amazon's <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.
-    </div>
+  <div style="background: yellow; padding: 10px; text-align: center; font-weight: bold;">
+    ⚠️ This is an educational clone of Amazon for portfolio/demo purposes only. No real data is collected or stored.
   </div>
-  <div class="login-container" id="loginStep2" style="display:none;">
-    <div class="login-logo">
-      <img src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="Amazon Logo">
+  <div class="login-box" style="max-width:350px;margin:60px auto;background:#fff;border:1px solid #ddd;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.07);padding:32px 28px 24px 28px;text-align:left;">
+    <div class="login-logo" style="display:flex;justify-content:center;margin-bottom:18px;">
+      <img src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="Amazon Logo" style="width:110px;">
     </div>
-    <h2>Sign-In</h2>
-    <label for="loginPass">Password</label>
-    <input id="loginPass" type="password" placeholder="Enter password">
-    <button onclick="login()">Sign-In</button>
-    <div class="login-links">
-      <a href="#">Forgot your password?</a>
-    </div>
+    <h2 style="font-size:22px;font-weight:400;margin-bottom:18px;">Demo Only – Not a Real Login</h2>
+    <p style="font-size:14px;color:#555;">This is a UI demonstration. No login or data collection occurs.</p>
   </div>
-  <script>
-    function showPasswordStep() {
-      document.getElementById('loginStep1').style.display = 'none';
-      document.getElementById('loginStep2').style.display = '';
-    }
-    function login() {
-      const email = document.getElementById('loginEmail').value.trim();
-      const password = document.getElementById('loginPass').value.trim();
-      if(email.length < 5 || password.length < 5) {
-        alert('Enter valid email and password.');
-        return;
-      }
-      localStorage.setItem('amazon_user', email);
-      window.location.href = 'index.html';
-    }
-  </script>
 </body>
 </html>

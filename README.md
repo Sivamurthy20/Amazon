@@ -1,32 +1,52 @@
-# Amazon.in
+# 🛒 Amazon Clone (Inspired by https://www.amazon.in)
 
-Welcome to the Amazon.in Clone!
-
-This project is a frontend clone of the Amazon India website, built for educational and demonstration purposes. It aims to closely match the layout, features, and interactivity of the original Amazon.in, including:
-
-## Key Features
-- Sticky double-layer navbar with:
-  - Location selector ("Deliver to [City]")
-  - Category dropdown (All)
-  - Large search bar
-  - Language selector (with flag)
-  - Account & Lists with dropdown
-  - Returns & Orders link
-  - Live Cart with item count and preview
-- Login system with email/phone and password steps
-- Product grid with images, titles, prices, ratings, badges, and hover effects
-- Add to Cart functionality with live cart preview
-- Responsive design for all screen sizes
-- Amazon-like color scheme and fonts
-- Footer with terms, privacy, help, and country selection
-
-## Technologies Used
-- HTML, CSS, JavaScript (Vanilla)
-- Firebase (for demo authentication and cart)
-
-## Disclaimer
-This project is for educational purposes only and is not affiliated with Amazon. No source code or assets are copied from Amazon. All UI and logic are original and inspired by the public Amazon.in website.
+This project is a full front-end clone of the official Amazon India website built using **HTML, CSS, and JavaScript**. The goal is to replicate the core features and layout of Amazon.in including login, navigation bar, product listings, cart functionality, and responsive design.
 
 ---
 
-For a live demo, open `index.html` in your browser.
+## 🔥 Features
+
+- ✅ Amazon-style sticky header and multi-level navbar
+- ✅ Sign In / Register page UI
+- ✅ Search bar with dropdown category filter
+- ✅ Language selector with country flag (EN-IN)
+- ✅ Product listing grid with:
+  - Product image, name, category
+  - Star ratings
+  - Price (₹)
+  - "Add to Cart" button
+- ✅ Responsive design (mobile, tablet, desktop)
+- ✅ Basic cart system using JavaScript + localStorage
+- ✅ Dropdowns for "Account & Lists", "All Categories", "Cart Preview"
+
+---
+
+## 🧱 Folder Structure
+
+amazon-clone/
+│
+├── index.html # Homepage (navbar + product listings)
+├── login.html # Login / Sign-in page
+├── product.html # Optional: single product view
+├── cart.html # Optional: full cart preview
+│
+├── /css
+│ └── style.css # All custom styles
+│
+├── /js
+│ ├── main.js # Navbar behavior, dropdowns
+│ └── cart.js # Add to cart, localStorage management
+│
+├── /images
+│ ├── logo.png # Amazon logo
+│ ├── banner.jpg # Hero slider or banner
+│ ├── product1.jpg # Sample product images
+│ └── ...
+│
+├── /assets
+│ └── fonts, icons # Optional: fonts, flag icons, SVGs
+│
+├── /data
+│ └── products.json # (Optional) JSON file for product data
+│
+└── README.md # Project documentation
