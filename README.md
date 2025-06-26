@@ -1,13 +1,13 @@
-# 🛒 Amazon Clone (Inspired by https://www.amazon.in)
+# 🛒 AmazonClone-Demo (Inspired by https://www.amazon.in)
 
-This project is a full front-end clone of the official Amazon India website built using **HTML, CSS, and JavaScript**. The goal is to replicate the core features and layout of Amazon.in including login, navigation bar, product listings, cart functionality, and responsive design.
+This project is a front-end educational clone of the official Amazon India website built using **HTML, CSS, and JavaScript**. The goal is to replicate the core features and layout of Amazon.in for learning and portfolio purposes only. No real data is collected or stored.
 
 ---
 
 ## 🔥 Features
 
 - ✅ Amazon-style sticky header and multi-level navbar
-- ✅ Sign In / Register page UI
+- ✅ Sign In / Register page UI (demo only, no real login)
 - ✅ Search bar with dropdown category filter
 - ✅ Language selector with country flag (EN-IN)
 - ✅ Product listing grid with:
@@ -21,32 +21,13 @@ This project is a full front-end clone of the official Amazon India website buil
 
 ---
 
-## 🧱 Folder Structure
+## 📁 Folder Structure
 
-amazon-clone/
+AmazonClone-Demo/
 │
 ├── index.html # Homepage (navbar + product listings)
-├── login.html # Login / Sign-in page
-├── product.html # Optional: single product view
-├── cart.html # Optional: full cart preview
-│
-├── /css
-│ └── style.css # All custom styles
-│
-├── /js
-│ ├── main.js # Navbar behavior, dropdowns
-│ └── cart.js # Add to cart, localStorage management
-│
-├── /images
-│ ├── logo.png # Amazon logo
-│ ├── banner.jpg # Hero slider or banner
-│ ├── product1.jpg # Sample product images
-│ └── ...
-│
-├── /assets
-│ └── fonts, icons # Optional: fonts, flag icons, SVGs
-│
-├── /data
-│ └── products.json # (Optional) JSON file for product data
-│
-└── README.md # Project documentation
+├── login.html # Login / Sign-in page (demo only)
+├── pages.html # Other demo pages
+├── style.css # All custom styles
+├── script.js # All JS logic
+├── README.md # Project info
