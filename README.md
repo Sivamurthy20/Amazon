@@ -1,6 +1,6 @@
-# 🛒 AmazonClone-Demo (Inspired by https://www.amazon.in)
+# 🛒 AmazonClone-Demo (Inspired by [Amazon.in](https://www.amazon.in))
 
-This project is a front-end educational clone of the official Amazon India website built using **HTML, CSS, and JavaScript**. The goal is to replicate the core features and layout of Amazon.in for learning and portfolio purposes only. No real data is collected or stored.
+This project is an educational front-end clone of the official Amazon India website. Some UI elements—such as the task bar, color scheme, and fonts—have been intentionally changed or customized in this clone for learning and demonstration purposes. No real data is collected or stored.
 
 ---
 
