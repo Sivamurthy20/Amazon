@@ -51,17 +51,85 @@
     <!-- Dynamic Product List -->
     <div class="products" id="products">
       <!-- Product Cards -->
-      <div class="product-card">
-        <img src="https://m.media-amazon.com/images/I/71K84j2O2eL._AC_UL480_FMwebp_QL65_.jpg" alt="Product 1">
+      <div class="product-card" onclick="showProductDetail('1')">
+        <img src="https://m.media-amazon.com/images/I/71K84j2O2eL._AC_UL480_FMwebp_QL65_.jpg" alt="Noise Smartwatch">
+        <div class="stars">★★★★☆</div>
         <h3>Noise Smartwatch</h3>
+        <div class="category">Electronics</div>
         <p>₹1,999</p>
-        <button>Add to Cart</button>
+        <button onclick="event.stopPropagation();addToCart('1')">Add to Cart</button>
       </div>
-      <div class="product-card">
-        <img src="https://m.media-amazon.com/images/I/71TPda7cwUL._AC_UL480_FMwebp_QL65_.jpg" alt="Product 2">
+      <div class="product-card" onclick="showProductDetail('2')">
+        <img src="https://m.media-amazon.com/images/I/71TPda7cwUL._AC_UL480_FMwebp_QL65_.jpg" alt="Samsung Galaxy M14">
+        <div class="stars">★★★★★</div>
         <h3>Samsung Galaxy M14</h3>
+        <div class="category">Electronics</div>
         <p>₹10,999</p>
-        <button>Add to Cart</button>
+        <button onclick="event.stopPropagation();addToCart('2')">Add to Cart</button>
+      </div>
+      <div class="product-card" onclick="showProductDetail('3')">
+        <img src="https://m.media-amazon.com/images/I/81vpsIs58WL._AC_UL480_FMwebp_QL65_.jpg" alt="Apple MacBook Air M1">
+        <div class="stars">★★★★★</div>
+        <h3>Apple MacBook Air M1</h3>
+        <div class="category">Electronics</div>
+        <p>₹84,990</p>
+        <button onclick="event.stopPropagation();addToCart('3')">Add to Cart</button>
+      </div>
+      <div class="product-card" onclick="showProductDetail('4')">
+        <img src="https://m.media-amazon.com/images/I/71g2ednj0JL._AC_UL480_FMwebp_QL65_.jpg" alt="The Psychology of Money">
+        <div class="stars">★★★★☆</div>
+        <h3>The Psychology of Money</h3>
+        <div class="category">Books</div>
+        <p>₹299</p>
+        <button onclick="event.stopPropagation();addToCart('4')">Add to Cart</button>
+      </div>
+      <div class="product-card" onclick="showProductDetail('5')">
+        <img src="https://m.media-amazon.com/images/I/81p1L85KinL._AC_UL480_FMwebp_QL65_.jpg" alt="Men's Casual Shirt">
+        <div class="stars">★★★☆☆</div>
+        <h3>Men's Casual Shirt</h3>
+        <div class="category">Fashion</div>
+        <p>₹499</p>
+        <button onclick="event.stopPropagation();addToCart('5')">Add to Cart</button>
+      </div>
+      <div class="product-card" onclick="showProductDetail('6')">
+        <img src="https://m.media-amazon.com/images/I/61Mblg0vQzL._AC_UL480_FMwebp_QL65_.jpg" alt="boAt Airdopes 141">
+        <div class="stars">★★★★☆</div>
+        <h3>boAt Airdopes 141</h3>
+        <div class="category">Electronics</div>
+        <p>₹1,299</p>
+        <button onclick="event.stopPropagation();addToCart('6')">Add to Cart</button>
+      </div>
+      <div class="product-card" onclick="showProductDetail('7')">
+        <img src="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL480_FMwebp_QL65_.jpg" alt="OnePlus Nord CE 3 Lite">
+        <div class="stars">★★★★☆</div>
+        <h3>OnePlus Nord CE 3 Lite</h3>
+        <div class="category">Electronics</div>
+        <p>₹19,999</p>
+        <button onclick="event.stopPropagation();addToCart('7')">Add to Cart</button>
+      </div>
+      <div class="product-card" onclick="showProductDetail('8')">
+        <img src="https://m.media-amazon.com/images/I/71vFKBpKakL._AC_UL480_FMwebp_QL65_.jpg" alt="Apple iPhone 13">
+        <div class="stars">★★★★★</div>
+        <h3>Apple iPhone 13</h3>
+        <div class="category">Electronics</div>
+        <p>₹52,999</p>
+        <button onclick="event.stopPropagation();addToCart('8')">Add to Cart</button>
+      </div>
+      <div class="product-card" onclick="showProductDetail('9')">
+        <img src="https://m.media-amazon.com/images/I/81bGKUa1e0L._AC_UL480_FMwebp_QL65_.jpg" alt="Atomic Habits">
+        <div class="stars">★★★★★</div>
+        <h3>Atomic Habits</h3>
+        <div class="category">Books</div>
+        <p>₹399</p>
+        <button onclick="event.stopPropagation();addToCart('9')">Add to Cart</button>
+      </div>
+      <div class="product-card" onclick="showProductDetail('10')">
+        <img src="https://m.media-amazon.com/images/I/71v0T8QyJIL._AC_UL480_FMwebp_QL65_.jpg" alt="Women's Kurti">
+        <div class="stars">★★★☆☆</div>
+        <h3>Women's Kurti</h3>
+        <div class="category">Fashion</div>
+        <p>₹599</p>
+        <button onclick="event.stopPropagation();addToCart('10')">Add to Cart</button>
       </div>
       <!-- Add more cards as needed -->
     </div>

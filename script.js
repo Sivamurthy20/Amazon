@@ -82,18 +82,111 @@ function renderStars(rating) {
 
 // --- Product Detail Modal ---
 function showProductDetail(productId) {
-  db.collection('products').doc(productId).get().then(doc => {
-    if (!doc.exists) return;
-    const p = doc.data();
-    document.getElementById('productDetailContent').innerHTML = `
-      <img src="${p.image}" alt="${p.name}" style="width:100%;height:200px;object-fit:contain;">
-      <h2>${p.name}</h2>
-      <p>${p.description || ''}</p>
-      <p><strong>Price:</strong> $${p.price}</p>
-      <button onclick="addToCart('${doc.id}')">Add to Cart</button>
-    `;
-    document.getElementById('productDetailModal').style.display = '';
-  });
+  // Demo product data (in real app, fetch from DB)
+  const products = [
+    {
+      id: '1',
+      name: 'Noise Smartwatch',
+      image: 'https://m.media-amazon.com/images/I/71K84j2O2eL._AC_UL480_FMwebp_QL65_.jpg',
+      price: 1999,
+      rating: 4,
+      category: 'Electronics',
+      description: 'Noise ColorFit Pulse Spo2 Smart Watch with 1.4" Full Touch, 10 Days Battery, SpO2, Heart Rate Monitor.'
+    },
+    {
+      id: '2',
+      name: 'Samsung Galaxy M14',
+      image: 'https://m.media-amazon.com/images/I/71TPda7cwUL._AC_UL480_FMwebp_QL65_.jpg',
+      price: 10999,
+      rating: 5,
+      category: 'Electronics',
+      description: 'Samsung Galaxy M14 5G (Smoky Teal, 6GB, 128GB Storage) | 50MP Triple Cam | 6000 mAh Battery.'
+    },
+    {
+      id: '3',
+      name: 'Apple MacBook Air M1',
+      image: 'https://m.media-amazon.com/images/I/81vpsIs58WL._AC_UL480_FMwebp_QL65_.jpg',
+      price: 84990,
+      rating: 5,
+      category: 'Electronics',
+      description: 'Apple MacBook Air Laptop M1 chip, 13.3-inch/33.74 cm Retina Display, 8GB RAM, 256GB SSD.'
+    },
+    {
+      id: '4',
+      name: 'The Psychology of Money',
+      image: 'https://m.media-amazon.com/images/I/71g2ednj0JL._AC_UL480_FMwebp_QL65_.jpg',
+      price: 299,
+      rating: 4,
+      category: 'Books',
+      description: 'Timeless lessons on wealth, greed, and happiness by Morgan Housel.'
+    },
+    {
+      id: '5',
+      name: "Men's Casual Shirt",
+      image: 'https://m.media-amazon.com/images/I/81p1L85KinL._AC_UL480_FMwebp_QL65_.jpg',
+      price: 499,
+      rating: 3,
+      category: 'Fashion',
+      description: 'Men Regular Fit Solid Spread Collar Casual Shirt.'
+    },
+    {
+      id: '6',
+      name: 'boAt Airdopes 141',
+      image: 'https://m.media-amazon.com/images/I/61Mblg0vQzL._AC_UL480_FMwebp_QL65_.jpg',
+      price: 1299,
+      rating: 4,
+      category: 'Electronics',
+      description: 'boAt Airdopes 141 Bluetooth TWS Earbuds with 42H Playtime, Low Latency, ENx Tech.'
+    },
+    {
+      id: '7',
+      name: 'OnePlus Nord CE 3 Lite',
+      image: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL480_FMwebp_QL65_.jpg',
+      price: 19999,
+      rating: 4,
+      category: 'Electronics',
+      description: 'OnePlus Nord CE 3 Lite 5G (Pastel Lime, 8GB RAM, 128GB Storage).'
+    },
+    {
+      id: '8',
+      name: 'Apple iPhone 13',
+      image: 'https://m.media-amazon.com/images/I/71vFKBpKakL._AC_UL480_FMwebp_QL65_.jpg',
+      price: 52999,
+      rating: 5,
+      category: 'Electronics',
+      description: 'Apple iPhone 13 (128GB) - Blue.'
+    },
+    {
+      id: '9',
+      name: 'Atomic Habits',
+      image: 'https://m.media-amazon.com/images/I/81bGKUa1e0L._AC_UL480_FMwebp_QL65_.jpg',
+      price: 399,
+      rating: 5,
+      category: 'Books',
+      description: 'Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones.'
+    },
+    {
+      id: '10',
+      name: "Women's Kurti",
+      image: 'https://m.media-amazon.com/images/I/71v0T8QyJIL._AC_UL480_FMwebp_QL65_.jpg',
+      price: 599,
+      rating: 3,
+      category: 'Fashion',
+      description: 'Women Rayon Printed Straight Kurta.'
+    }
+  ];
+  const p = products.find(x => x.id === productId);
+  if (!p) return;
+  document.getElementById('productDetailContent').innerHTML = `
+    <img src="${p.image}" alt="${p.name}" style="width:100%;height:200px;object-fit:contain;">
+    <h2>${p.name}</h2>
+    <div class='stars'>${'★'.repeat(p.rating)}${'☆'.repeat(5-p.rating)}</div>
+    <div class='category'><strong>Category:</strong> ${p.category}</div>
+    <p>${p.description}</p>
+    <p><strong>Price:</strong> ₹${p.price}</p>
+    <button onclick="addToCart('${p.id}')">Add to Cart</button>
+  `;
+  document.getElementById('productDetailModal').style.display = '';
 }
 function closeProductDetail() {
   document.getElementById('productDetailModal').style.display = 'none';
