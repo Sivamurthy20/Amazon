@@ -1,33 +1,23 @@
-# 🛒 AmazonClone-Demo (Inspired by [Amazon.in](https://www.amazon.in))
+# AmazonClone-Demo
 
-This project is an educational front-end clone of the official Amazon India website. Some UI elements—such as the task bar, color scheme, and fonts—have been intentionally changed or customized in this clone for learning and demonstration purposes. No real data is collected or stored.
+This is a simple educational project that recreates the look and feel of the Amazon India website using HTML, CSS, and JavaScript. It is not a real shopping site—it's just for learning and portfolio purposes.
+
+## Main Features
+- Sticky header and navigation bar, similar to Amazon
+- Demo sign-in page (no real login, just a mock UI)
+- Search bar with category dropdown
+- Language selector with flag
+- Product grid with images, names, prices, and ratings
+- Add to Cart button (works with localStorage for demo)
+- Responsive design for mobile and desktop
+- Dropdowns for Account & Lists, Cart Preview, and more
+
+## How to use
+Just open `index.html` in your browser. You can click around, add items to the cart, and see how the UI works. The login page is only for demonstration and does not collect any information.
+
+## Disclaimer
+This is not an official Amazon site. It is for educational use only. No real purchases, logins, or data collection happen here.
 
 ---
 
-## 🔥 Features
-
-- ✅ Amazon-style sticky header and multi-level navbar
-- ✅ Sign In / Register page UI (demo only, no real login)
-- ✅ Search bar with dropdown category filter
-- ✅ Language selector with country flag (EN-IN)
-- ✅ Product listing grid with:
-  - Product image, name, category
-  - Star ratings
-  - Price (₹)
-  - "Add to Cart" button
-- ✅ Responsive design (mobile, tablet, desktop)
-- ✅ Basic cart system using JavaScript + localStorage
-- ✅ Dropdowns for "Account & Lists", "All Categories", "Cart Preview"
-
----
-
-## 📁 Folder Structure
-
-AmazonClone-Demo/
-│
-├── index.html # Homepage (navbar + product listings)
-├── login.html # Login / Sign-in page (demo only)
-├── pages.html # Other demo pages
-├── style.css # All custom styles
-├── script.js # All JS logic
-├── README.md # Project info
+If you want to learn how big e-commerce sites are built, or want to show off your front-end skills, feel free to use or modify this project!
