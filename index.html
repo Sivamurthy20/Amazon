@@ -8,18 +8,78 @@
 </head>
 <body>
   <!-- Header -->
-  <header class="header">
-    <div class="logo"><img src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="Amazon Clone"></div>
-    <div class="search-bar">
-      <input type="text" placeholder="Search Amazon Clone">
-      <button>🔍</button>
+  <header class="header" role="banner">
+    <div class="nav-left">
+      <a href="#" class="logo" aria-label="Amazon Home">
+        <img src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="Amazon Logo">
+      </a>
+      <div class="location-box" tabindex="0" aria-label="Choose your location">
+        <i class="fa fa-map-marker"></i>
+        <div>
+          <span class="small">Deliver to</span><br>
+          <span class="bold">India</span>
+        </div>
+      </div>
     </div>
+    <form class="search-bar" role="search" aria-label="Site search">
+      <select class="category-dropdown" aria-label="Search category">
+        <option value="all">All</option>
+        <option value="electronics">Electronics</option>
+        <option value="books">Books</option>
+        <option value="fashion">Fashion</option>
+        <option value="deals">Today's Deals</option>
+      </select>
+      <input type="text" placeholder="Search Amazon.in" aria-label="Search">
+      <button type="submit" aria-label="Search"><i class="fa fa-search"></i></button>
+    </form>
     <div class="nav-right">
-      <div class="nav-item" id="userGreeting">Hello, Sign in<br><strong>Account & Lists</strong></div>
-      <div class="nav-item" onclick="showOrderHistory()">Returns<br><strong>& Orders</strong></div>
-      <div class="nav-item cart" onclick="showCart()">🛒 Cart <span class="cart-count" id="cartCount">0</span></div>
+      <div class="lang-selector" tabindex="0" aria-label="Choose language">
+        <img src="https://flagcdn.com/in.svg" alt="IN" class="flag">
+        <span>EN</span>
+        <i class="fa fa-caret-down"></i>
+      </div>
+      <div class="account-lists" tabindex="0" aria-haspopup="true" aria-expanded="false">
+        <span class="small">Hello, Sign in</span><br>
+        <span class="bold">Account & Lists <i class="fa fa-caret-down"></i></span>
+        <div class="account-dropdown" role="menu" aria-label="Account menu">
+          <button class="sign-in-btn">Sign in</button>
+          <ul>
+            <li><a href="#">Your Orders</a></li>
+            <li><a href="#">Wishlist</a></li>
+            <li><a href="#">Prime Membership</a></li>
+            <li><a href="#">Your Account</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="nav-item" tabindex="0">Returns<br><span class="bold">& Orders</span></div>
+      <div class="cart" tabindex="0" aria-label="Cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+        <span class="cart-text">Cart</span>
+        <div class="cart-dropdown" role="menu" aria-label="Cart preview">
+          <div id="cartPreviewItems">Your cart is empty</div>
+        </div>
+      </div>
     </div>
   </header>
+  <!-- End Header -->
+
+  <!-- Second Nav Row (Sub-navbar) -->
+  <nav class="sub-navbar">
+    <ul>
+      <li>Mobiles</li>
+      <li>Deals</li>
+      <li>Customer Service</li>
+      <li>Books</li>
+      <li>Fashion</li>
+      <li>Electronics</li>
+      <li>Home & Kitchen</li>
+      <li>Appliances</li>
+      <li>Gift Ideas</li>
+      <li>Amazon Pay</li>
+    </ul>
+  </nav>
+  <!-- End Second Nav Row -->
 
   <!-- Navbar -->
   <nav class="navbar">
@@ -41,10 +101,17 @@
     </ul>
   </nav>
 
-  <!-- Hero Image -->
-  <section class="hero">
-    <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/Beauty/GW/june/BTF/june_unrec_pc_3000._CB602387846_.jpg" alt="Amazon Banner">
+  <!-- Hero Image Slider (Local Images) -->
+  <section class="hero-slider">
+    <div class="slider-wrapper">
+      <img class="slider-img active" src="./images/banner1.jpg" alt="Banner 1">
+      <img class="slider-img" src="./images/banner2.jpg" alt="Banner 2">
+      <img class="slider-img" src="./images/banner3.jpg" alt="Banner 3">
+      <button class="slider-btn prev" aria-label="Previous slide">&#10094;</button>
+      <button class="slider-btn next" aria-label="Next slide">&#10095;</button>
+    </div>
   </section>
+  <!-- End Hero Image Slider -->
 
   <!-- Main Content Integration -->
   <main>
@@ -133,11 +200,76 @@
       </div>
       <!-- Add more cards as needed -->
     </div>
+    <!-- Product Grid Section -->
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="./images/watch.jpg" alt="Noise Smartwatch">
+        <h3>Noise Smartwatch</h3>
+        <p>Electronics</p>
+        <p>★★★★★</p>
+        <p><strong>₹1,999</strong></p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="./images/phone.jpg" alt="Samsung Galaxy M14">
+        <h3>Samsung Galaxy M14</h3>
+        <p>Electronics</p>
+        <p>★★★★★</p>
+        <p><strong>₹10,999</strong></p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="./images/laptop.jpg" alt="Apple MacBook Air M1">
+        <h3>Apple MacBook Air M1</h3>
+        <p>Electronics</p>
+        <p>★★★★★</p>
+        <p><strong>₹84,990</strong></p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="./images/book.jpg" alt="The Psychology of Money">
+        <h3>The Psychology of Money</h3>
+        <p>Books</p>
+        <p>★★★★☆</p>
+        <p><strong>₹299</strong></p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="./images/earbuds.jpg" alt="boAt Airdopes 141">
+        <h3>boAt Airdopes 141</h3>
+        <p>Electronics</p>
+        <p>★★★★☆</p>
+        <p><strong>₹1,299</strong></p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="./images/shirt.jpg" alt="Men's Casual Shirt">
+        <h3>Men's Casual Shirt</h3>
+        <p>Fashion</p>
+        <p>★★★☆☆</p>
+        <p><strong>₹499</strong></p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="./images/monitor.jpg" alt="Dell 24&quot; Monitor">
+        <h3>Dell 24" Monitor</h3>
+        <p>Electronics</p>
+        <p>★★★★☆</p>
+        <p><strong>₹9,499</strong></p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="./images/women.jpg" alt="Women’s Kurti">
+        <h3>Women’s Kurti</h3>
+        <p>Fashion</p>
+        <p>★★★☆☆</p>
+        <p><strong>₹599</strong></p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
     <!-- Cart Page -->
     <div class="cart-page" id="cartPage" style="display:none">
-      <h2>Your Cart</h2>
-      <div id="cartItems"></div>
-      <button onclick="checkout()">Checkout</button>
+      <!-- Cart content will be rendered by JS -->
     </div>
     <!-- Login/Signup Page -->
     <div class="auth-page" id="authPage" style="display:none">
@@ -166,6 +298,21 @@
 
   <!-- Footer -->
   <footer class="footer">
+    <div class="footer-links">
+      <a href="#">Conditions of Use</a>
+      <a href="#">Privacy Notice</a>
+      <a href="#">Help</a>
+      <span class="footer-country">
+        <label for="countrySelect">Country:</label>
+        <select id="countrySelect">
+          <option value="IN">India</option>
+          <option value="US">United States</option>
+          <option value="UK">United Kingdom</option>
+          <option value="CA">Canada</option>
+          <option value="AU">Australia</option>
+        </select>
+      </span>
+    </div>
     <p>© 2025 Amazon Clone | Built by Siva</p>
   </footer>
 

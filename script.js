@@ -47,24 +47,39 @@ function login() {
 }
 
 // --- Product Functions ---
-function loadProducts() {
+function loadProducts(sortBy = '', filterCategory = 'all', filterDeal = false) {
   db.collection('products').get().then(snapshot => {
-    const products = [];
+    let products = [];
     snapshot.forEach(doc => {
       products.push({ id: doc.id, ...doc.data() });
     });
+    // Filtering
+    let filtered = products;
+    if (filterCategory !== 'all') {
+      filtered = filtered.filter(p => (p.category || '').toLowerCase() === filterCategory);
+    }
+    if (filterDeal) {
+      filtered = filtered.filter(p => p.deal === true);
+    }
+    // Sorting
+    if (sortBy === 'price-asc') {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'price-desc') {
+      filtered.sort((a, b) => b.price - a.price);
+    } else if (sortBy === 'rating') {
+      filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+    }
     const productsDiv = document.getElementById('products');
     if (!productsDiv) return;
-    let filtered = products;
-    if (currentCategory !== 'all') {
-      filtered = products.filter(p => (p.category || '').toLowerCase() === currentCategory);
-    }
     productsDiv.innerHTML = filtered.map(p => `
-      <div class="product-card" onclick="showProductDetail('${p.id}')">
+      <div class="product-card${p.deal ? ' deal' : ''}" onclick="showProductDetail('${p.id}')">
         <img src="${p.image}" alt="${p.name}">
+        ${p.deal ? '<span class=\'badge badge-deal\'>Deal</span>' : ''}
+        ${p.discount ? `<span class='badge badge-discount'>${p.discount}% OFF</span>` : ''}
         ${renderStars(p.rating || 0)}
         <h3>${p.name}</h3>
-        <p>$${p.price}</p>
+        <div class='category'>${p.category}</div>
+        <p>₹${p.price}</p>
         <button onclick="event.stopPropagation();addToCart('${p.id}')">Add to Cart</button>
       </div>
     `).join('');
@@ -384,19 +399,47 @@ function checkout() {
   alert('Checkout not implemented in demo.');
 }
 
-// Update cart count in header
+// --- Add to Cart Logic and Cart Preview ---
+function getCart() {
+  return JSON.parse(localStorage.getItem('amazon_cart') || '[]');
+}
+function setCart(cart) {
+  localStorage.setItem('amazon_cart', JSON.stringify(cart));
+}
 function updateCartCount() {
-  const user = auth.currentUser;
-  if (!user) {
-    document.getElementById('cartCount').innerText = '0';
+  const cart = getCart();
+  document.getElementById('cartCount').textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+}
+function updateCartPreview() {
+  const cart = getCart();
+  const preview = document.getElementById('cartPreviewItems');
+  if (!cart.length) {
+    preview.textContent = 'Your cart is empty';
     return;
   }
-  db.collection('users').doc(user.uid).collection('cart').get().then(snapshot => {
-    let count = 0;
-    snapshot.forEach(doc => { count += doc.data().quantity; });
-    document.getElementById('cartCount').innerText = count;
-  });
+  preview.innerHTML = cart.map(item => `<div style='display:flex;align-items:center;gap:8px;margin-bottom:6px;'><img src='${item.img}' alt='' style='width:32px;height:32px;object-fit:contain;border-radius:3px;'> <span>${item.name}</span> <span style='color:#007600;'>x${item.qty}</span></div>`).join('');
 }
+document.addEventListener('DOMContentLoaded', function() {
+  // Attach to all Add to Cart buttons in .product-grid
+  document.querySelectorAll('.product-grid .product-card button').forEach((btn, idx) => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const card = btn.closest('.product-card');
+      const name = card.querySelector('h3').textContent;
+      const img = card.querySelector('img').src;
+      let cart = getCart();
+      let found = cart.find(i => i.name === name);
+      if (found) found.qty += 1;
+      else cart.push({ name, img, qty: 1 });
+      setCart(cart);
+      updateCartCount();
+      updateCartPreview();
+    });
+  });
+  updateCartCount();
+  updateCartPreview();
+});
 
 // Update user greeting
 function updateUserGreeting() {
@@ -481,6 +524,67 @@ function removeFromCart(productId) {
   });
 }
 
+// --- Logout Functionality ---
+function showUserGreeting() {
+  const user = localStorage.getItem('amazon_user');
+  const acc = document.querySelector('.account-lists .small');
+  const accDropdown = document.querySelector('.account-dropdown');
+  if (user && acc) {
+    acc.textContent = `Hello, ${user.split('@')[0]}`;
+    // Add logout button if not present
+    if (!document.getElementById('logoutBtn')) {
+      const btn = document.createElement('button');
+      btn.textContent = 'Logout';
+      btn.id = 'logoutBtn';
+      btn.style = 'width:90%;margin:10px 5% 0 5%;background:#fff;color:#232f3e;border:1px solid #ddd;border-radius:4px;padding:8px 0;font-weight:bold;cursor:pointer;';
+      btn.onclick = function() {
+        localStorage.removeItem('amazon_user');
+        window.location.href = 'login.html';
+      };
+      accDropdown.appendChild(btn);
+    }
+  }
+}
+document.addEventListener('DOMContentLoaded', showUserGreeting);
+
+// --- Cart Page Logic ---
+function renderCartPage() {
+  const cartPage = document.getElementById('cartPage');
+  if (!cartPage) return;
+  const cart = JSON.parse(localStorage.getItem('amazon_cart') || '[]');
+  if (!cart.length) {
+    cartPage.innerHTML = '<h2>Your Cart</h2><div>Your cart is empty.</div>';
+    return;
+  }
+  cartPage.innerHTML = '<h2>Your Cart</h2>' +
+    cart.map(item => `
+      <div style='display:flex;align-items:center;gap:16px;margin-bottom:16px;background:#fff;padding:12px 8px;border-radius:6px;'>
+        <img src='${item.img}' alt='' style='width:60px;height:60px;object-fit:contain;border-radius:4px;'>
+        <span style='flex:1;'>${item.name}</span>
+        <span style='color:#007600;'>x${item.qty}</span>
+        <button onclick='removeFromCartPage("${item.name}")' style='background:#ff9900;color:#fff;border:none;border-radius:4px;padding:6px 12px;cursor:pointer;'>Remove</button>
+      </div>
+    `).join('') +
+    `<button onclick='checkout()' style='background:#ffd814;color:#232f3e;font-weight:bold;border:none;border-radius:4px;padding:10px 24px;margin-top:10px;cursor:pointer;'>Checkout</button>`;
+}
+function removeFromCartPage(name) {
+  let cart = JSON.parse(localStorage.getItem('amazon_cart') || '[]');
+  cart = cart.filter(i => i.name !== name);
+  localStorage.setItem('amazon_cart', JSON.stringify(cart));
+  renderCartPage();
+  updateCartCount();
+  updateCartPreview();
+}
+// Show cart page when cart icon is clicked
+if (document.querySelector('.cart')) {
+  document.querySelector('.cart').addEventListener('click', function() {
+    document.getElementById('products').style.display = 'none';
+    document.querySelector('.product-grid')?.style.display = 'none';
+    document.getElementById('cartPage').style.display = '';
+    renderCartPage();
+  });
+}
+
 // --- Navigation (for demo) ---
 document.addEventListener('DOMContentLoaded', () => {
   auth.onAuthStateChanged(user => {
@@ -517,3 +621,96 @@ function filterByCategory() {
   currentCategory = document.getElementById('categoryDropdown').value;
   loadProducts();
 }
+
+// --- Image Slider Logic ---
+document.addEventListener('DOMContentLoaded', function() {
+  const slides = document.querySelectorAll('.slider-img');
+  const prevBtn = document.querySelector('.slider-btn.prev');
+  const nextBtn = document.querySelector('.slider-btn.next');
+  let current = 0;
+  function showSlide(idx) {
+    slides.forEach((img, i) => {
+      img.classList.toggle('active', i === idx);
+    });
+  }
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+  function prevSlide() {
+    current = (current - 1 + slides.length) % slides.length;
+    showSlide(current);
+  }
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+  }
+  setInterval(nextSlide, 5000);
+});
+
+// --- Cart Dropdown Preview ---
+document.addEventListener('DOMContentLoaded', function() {
+  const cart = document.querySelector('.cart');
+  const cartDropdown = document.querySelector('.cart-dropdown');
+  cart.addEventListener('mouseenter', () => {
+    cartDropdown.style.display = 'block';
+  });
+  cart.addEventListener('mouseleave', () => {
+    cartDropdown.style.display = 'none';
+  });
+  cart.addEventListener('focus', () => {
+    cartDropdown.style.display = 'block';
+  });
+  cart.addEventListener('blur', () => {
+    cartDropdown.style.display = 'none';
+  });
+});
+
+// --- Account & Lists Dropdown ---
+document.addEventListener('DOMContentLoaded', function() {
+  const acc = document.querySelector('.account-lists');
+  const accDropdown = document.querySelector('.account-dropdown');
+  acc.addEventListener('mouseenter', () => {
+    accDropdown.style.display = 'block';
+  });
+  acc.addEventListener('mouseleave', () => {
+    accDropdown.style.display = 'none';
+  });
+  acc.addEventListener('focus', () => {
+    accDropdown.style.display = 'block';
+  });
+  acc.addEventListener('blur', () => {
+    accDropdown.style.display = 'none';
+  });
+});
+
+// --- Sorting and Filtering UI ---
+document.addEventListener('DOMContentLoaded', function() {
+  // Add sorting and advanced filter controls
+  const controls = document.createElement('div');
+  controls.className = 'product-controls';
+  controls.innerHTML = `
+    <label>Sort by:
+      <select id="sortSelect">
+        <option value="">Default</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="rating">Rating</option>
+      </select>
+    </label>
+    <label><input type="checkbox" id="dealFilter"> Deals Only</label>
+  `;
+  const productsSection = document.getElementById('products');
+  if (productsSection) {
+    productsSection.parentNode.insertBefore(controls, productsSection);
+  }
+  document.getElementById('sortSelect').addEventListener('change', function() {
+    loadProducts(this.value, document.getElementById('categoryDropdown').value, document.getElementById('dealFilter').checked);
+  });
+  document.getElementById('dealFilter').addEventListener('change', function() {
+    loadProducts(document.getElementById('sortSelect').value, document.getElementById('categoryDropdown').value, this.checked);
+  });
+  document.getElementById('categoryDropdown').addEventListener('change', function() {
+    loadProducts(document.getElementById('sortSelect').value, this.value, document.getElementById('dealFilter').checked);
+  });
+});
